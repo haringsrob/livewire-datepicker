@@ -16,8 +16,7 @@ abstract class DatePickerComponent extends Component
     public const TYPE_RANGE_PICKER = 'range-picker';
     public const TYPE_DISPLAY_ONLY = 'display-only';
 
-    public Carbon $activeMonth;
-    public Carbon $today;
+    public ?Carbon $activeMonth = null;
     public bool $startWeekOnSunday = false;
 
     protected string $type = self::TYPE_DISPLAY_ONLY;
@@ -65,25 +64,23 @@ abstract class DatePickerComponent extends Component
         return new Collection();
     }
 
-    public function mount()
-    {
-        if (!$this->availabilityData) {
-            $this->availabilityData = collect();
-        }
-
-        $this->activeMonth = Carbon::now();
-
-        $this->today = Carbon::now();
-    }
-
     public function goNextMonth(): void
     {
-        $this->activeMonth->addMonth();
+        $this->getActiveMonth()->addMonth();
     }
 
     public function goPreviousMonth(): void
     {
-        $this->activeMonth->subMonth();
+        $this->getActiveMonth()->subMonth();
+    }
+
+    public function getActiveMonth(): Carbon
+    {
+        if (null === $this->activeMonth) {
+            $this->activeMonth = Carbon::now();
+        }
+
+        return $this->activeMonth;
     }
 
     public function isDisabled(Carbon $date): bool
@@ -241,8 +238,8 @@ abstract class DatePickerComponent extends Component
 
     public function render(): View
     {
-        $startPeriod = $this->activeMonth->clone()->startOfMonth();
-        $endPeriod = $this->activeMonth->clone()->endOfMonth();
+        $startPeriod = $this->getActiveMonth()->clone()->startOfMonth();
+        $endPeriod = $this->getActiveMonth()->clone()->endOfMonth();
 
         $dates = CarbonPeriod::create($startPeriod, $endPeriod)->toArray();
 

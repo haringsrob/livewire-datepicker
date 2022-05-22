@@ -14,6 +14,8 @@ class DatePickerDayData
         public bool $cannotPickOver = false,
         // Classes to apply to individual date.
         public ?string $classes = null,
+        // Tooltip only works if https://github.com/ryangjchandler/alpine-tooltip is enabled.
+        public ?string $toolTip = null,
     ) {
     }
 }

@@ -46,7 +46,10 @@
                     cursor-not-allowed
                     opacity-25
                 @endif
-            "
+                "
+                 @if ($dayData->toolTip)
+                     x-tooltip.raw.html="{{$dayData->toolTip}}"
+                 @endif
                  @if (!$dayData->disabled && !$this->isDisabled($day))
                      wire:click="triggerDate('{{$day->format(config('livewire-datepicker.event_date_format'))}}')"
                     @endif
