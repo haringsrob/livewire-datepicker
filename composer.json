@@ -15,6 +15,7 @@
     "LivewireDatepicker"
   ],
   "require": {
+    "php": "8.1",
     "illuminate/support": "~9",
     "livewire/livewire": "^2"
   },
