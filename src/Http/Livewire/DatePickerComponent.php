@@ -214,6 +214,32 @@ abstract class DatePickerComponent extends Component
         }
     }
 
+    protected function getWeekDaysInOrder(bool $startOnSunday = false): array
+    {
+        if ($startOnSunday) {
+            return [
+                CarbonInterface::SUNDAY => __('Sunday'),
+                CarbonInterface::MONDAY => __('Monday'),
+                CarbonInterface::TUESDAY => __('Tuesday'),
+                CarbonInterface::WEDNESDAY => __('Wednesday'),
+                CarbonInterface::THURSDAY => __('Thursday'),
+                CarbonInterface::FRIDAY => __('Friday'),
+                CarbonInterface::SATURDAY => __('Saturday'),
+            ];
+        }
+
+        return [
+            CarbonInterface::MONDAY => __('Monday'),
+            CarbonInterface::TUESDAY => __('Tuesday'),
+            CarbonInterface::WEDNESDAY => __('Wednesday'),
+            CarbonInterface::THURSDAY => __('Thursday'),
+            CarbonInterface::FRIDAY => __('Friday'),
+            CarbonInterface::SATURDAY => __('Saturday'),
+            CarbonInterface::SUNDAY => __('Sunday'),
+        ];
+    }
+
+
     public function render(): View
     {
         $startPeriod = $this->activeMonth->clone()->startOfMonth();
@@ -221,8 +247,7 @@ abstract class DatePickerComponent extends Component
 
         $dates = CarbonPeriod::create($startPeriod, $endPeriod)->toArray();
 
-        // @todo: Move this out of here.
-        $order = Animalo::getWeekDaysInOrder($this->startWeekOnSunday);
+        $order = $this->getWeekDaysInOrder($this->startWeekOnSunday);
 
         $this->setDisableAsOf();
 
