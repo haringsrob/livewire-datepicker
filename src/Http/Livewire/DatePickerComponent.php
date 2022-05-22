@@ -2,7 +2,6 @@
 
 namespace Haringsrob\LivewireDatepicker\Http\Livewire;
 
-use App\Animalo;
 use Carbon\Carbon;
 use Carbon\CarbonInterface;
 use Carbon\CarbonPeriod;
