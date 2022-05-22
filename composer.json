@@ -1,0 +1,44 @@
+{
+  "name": "haringsrob/livewire-datepicker",
+  "description": ":package_description",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Harings Rob",
+      "email": "haringsrob@gmail.com",
+      "homepage": "https://harings.be"
+    }
+  ],
+  "homepage": "https://github.com/haringsrob/livewire-datepicker",
+  "keywords": [
+    "Laravel",
+    "LivewireDatepicker"
+  ],
+  "require": {
+    "illuminate/support": "~9"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~9.0",
+    "orchestra/testbench": "~7"
+  },
+  "autoload": {
+    "psr-4": {
+      "Haringsrob\\LivewireDatepicker\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Haringsrob\\LivewireDatepicker\\Tests\\": "tests"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Haringsrob\\LivewireDatepicker\\LivewireDatepickerServiceProvider"
+      ],
+      "aliases": {
+        "LivewireDatepicker": "Haringsrob\\LivewireDatepicker\\Facades\\LivewireDatepicker"
+      }
+    }
+  }
+}
