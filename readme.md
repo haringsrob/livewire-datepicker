@@ -18,6 +18,11 @@ $ composer require haringsrob/livewire-datepicker
 
 ## Usage
 
+This package uses tailwindcss.
+
+You need to add `./vendor/haringsrob/livewire-datepicker/resources/**/*.blade.php` to the purge list of your
+tailwind.config.json
+
 To use this, create a new livewire component and extend the `DatePickerComponent` class:
 
 ```php
