@@ -145,7 +145,7 @@ abstract class DatePickerComponent extends Component
 
     public function triggerDate(string $date): void
     {
-        $date = Carbon::createFromFormat(config('livewire-datepicker.event_date_format'), $date);
+        $dateCarbon = Carbon::createFromFormat(config('livewire-datepicker.event_date_format'), $date);
         if ($this->type === self::TYPE_RANGE_PICKER) {
             if ($this->startRange && $this->endRange) {
                 $this->startRange = null;
@@ -153,10 +153,10 @@ abstract class DatePickerComponent extends Component
             }
             // Set the day that is not yet set.
             if (!$this->startRange) {
-                $this->disableBefore = $date;
-                $this->startRange = $date;
+                $this->disableBefore = $dateCarbon;
+                $this->startRange = $dateCarbon;
             } elseif (!$this->endRange) {
-                $this->endRange = $date;
+                $this->endRange = $dateCarbon;
                 $this->disableBefore = null;
                 $this->disableAsOf = null;
             }
@@ -171,10 +171,25 @@ abstract class DatePickerComponent extends Component
         }
 
         if ($this->type === self::TYPE_DATEPICKER) {
-            if (isset($this->selectedDates[$date->format(config('livewire-datepicker.event_date_format'), $date)])) {
-                unset($this->selectedDates[$date->format(config('livewire-datepicker.event_date_format'), $date)]);
+            if (
+                isset(
+                    $this->selectedDates[$dateCarbon->format(
+                        config('livewire-datepicker.event_date_format'),
+                        $dateCarbon
+                    )]
+                )
+            ) {
+                unset(
+                    $this->selectedDates[$dateCarbon->format(
+                        config('livewire-datepicker.event_date_format'),
+                        $dateCarbon
+                    )]
+                );
             } else {
-                $this->selectedDates[$date->format(config('livewire-datepicker.event_date_format'), $date)] = $date;
+                $this->selectedDates[$dateCarbon->format(
+                    config('livewire-datepicker.event_date_format'),
+                    $dateCarbon
+                )] = $dateCarbon;
             }
             $this->onDatesSet();
         }
