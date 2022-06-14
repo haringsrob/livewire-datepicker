@@ -56,7 +56,7 @@
             >
                 <div class="
                     mx-auto flex h-7 w-7 items-center justify-center rounded-full
-                    @if ($this->isSelected($day)) bg-primary-500 hover:bg-primary-600 text-white
+                    @if ($this->isSelected($day)) border-2 !border-primary-900 text-white shadow-lg
                     @elseif ($day->isToday()) font-bold @endif
                     {{$dayData->classes ?? ''}}
                 ">
