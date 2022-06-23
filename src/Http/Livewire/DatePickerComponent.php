@@ -140,7 +140,7 @@ abstract class DatePickerComponent extends Component
 
     public function isSelected(Carbon $date): bool
     {
-        return isset($this->selectedDates[$date->format(config('livewire-datepicker.event_date_format'), $date)]);
+        return isset($this->selectedDates[$date->format(config('livewire-datepicker.event_date_format'))]);
     }
 
     public function triggerDate(string $date): void
@@ -171,24 +171,11 @@ abstract class DatePickerComponent extends Component
         }
 
         if ($this->type === self::TYPE_DATEPICKER) {
-            if (
-                isset(
-                    $this->selectedDates[$dateCarbon->format(
-                        config('livewire-datepicker.event_date_format'),
-                        $dateCarbon
-                    )]
-                )
-            ) {
-                unset(
-                    $this->selectedDates[$dateCarbon->format(
-                        config('livewire-datepicker.event_date_format'),
-                        $dateCarbon
-                    )]
-                );
+            if (isset($this->selectedDates[$dateCarbon->format(config('livewire-datepicker.event_date_format'))])) {
+                unset($this->selectedDates[$dateCarbon->format(config('livewire-datepicker.event_date_format'))]);
             } else {
                 $this->selectedDates[$dateCarbon->format(
-                    config('livewire-datepicker.event_date_format'),
-                    $dateCarbon
+                    config('livewire-datepicker.event_date_format')
                 )] = $dateCarbon;
             }
             $this->onDatesSet();
@@ -263,7 +250,6 @@ abstract class DatePickerComponent extends Component
         $this->setDisableAsOf();
 
         return view('livewire-datepicker::livewire.date-picker', [
-            'startOfWeek' => $this->startWeekOnSunday ? CarbonInterface::SUNDAY : CarbonInterface::MONDAY,
             'year' => $startPeriod->year,
             'monthName' => $startPeriod->monthName,
             'weekDays' => $order,
