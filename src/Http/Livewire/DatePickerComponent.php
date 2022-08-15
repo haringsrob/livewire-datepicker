@@ -14,6 +14,7 @@ abstract class DatePickerComponent extends Component
 {
     public const TYPE_DATEPICKER = 'datepicker';
     public const TYPE_RANGE_PICKER = 'range-picker';
+    public const TYPE_RANGE_SINGLE = 'range-single';
     public const TYPE_DISPLAY_ONLY = 'display-only';
 
     public ?Carbon $activeMonth = null;
@@ -146,6 +147,12 @@ abstract class DatePickerComponent extends Component
     public function triggerDate(string $date): void
     {
         $dateCarbon = Carbon::createFromFormat(config('livewire-datepicker.event_date_format'), $date);
+        if ($this->type === self::TYPE_RANGE_SINGLE) {
+            $this->startRange = $dateCarbon->midDay();
+            $this->endRange = $dateCarbon->midDay();
+            $this->onDatesSet();
+            return;
+        }
         if ($this->type === self::TYPE_RANGE_PICKER) {
             if ($this->startRange && $this->endRange) {
                 $this->startRange = null;
