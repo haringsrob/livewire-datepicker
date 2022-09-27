@@ -25,6 +25,7 @@ abstract class DatePickerComponent extends Component
     protected ?Collection $availabilityData = null;
 
     public ?Carbon $disableBefore = null;
+    public ?Carbon $disableBeforeOriginal = null;
     public ?Carbon $disableAsOf = null;
 
     public ?Carbon $startRange = null;
@@ -160,11 +161,12 @@ abstract class DatePickerComponent extends Component
             }
             // Set the day that is not yet set.
             if (!$this->startRange) {
+                $this->disableBeforeOriginal = $this->disableBefore;
                 $this->disableBefore = $dateCarbon;
                 $this->startRange = $dateCarbon;
             } elseif (!$this->endRange) {
                 $this->endRange = $dateCarbon;
-                $this->disableBefore = null;
+                $this->disableBefore = $this->disableBeforeOriginal;
                 $this->disableAsOf = null;
             }
 

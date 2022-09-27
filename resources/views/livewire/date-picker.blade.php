@@ -25,7 +25,7 @@
     @endforeach
     @foreach ($dates as $index => $day)
       @php
-        /** @var \App\Http\Livewire\Manage\Widgets\Dto\DatePickerDayData $dayData */
+        /** @var \Haringsrob\LivewireDatepicker\Dto\DatePickerDayData $dayData */
         $dayData = $this->getAvailabilityFor($day);
       @endphp
       @if ($loop->first)
@@ -33,7 +33,9 @@
           <div></div>
         @endfor
       @endif
-      <div class="@if ($this->type === self::TYPE_RANGE_SINGLE) !rounded-l-full !rounded-r-full @endif @if ($this->isStartRange($day)) bg-primary-300 rounded-l-full
+      <div
+          wire:key="{{$dayData->date->format('ymd')}}"
+          class="@if ($this->type === self::TYPE_RANGE_SINGLE) !rounded-l-full !rounded-r-full @endif @if ($this->isStartRange($day)) bg-primary-300 rounded-l-full
                 @elseif ($this->isEndRange($day)) bg-primary-300 rounded-r-full
                 @elseif ($this->isInRange($day)) bg-primary-100 @endif @if (!$dayData->disabled && !$this->isDisabled($day)) cursor-pointer
                 @else
