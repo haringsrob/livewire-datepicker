@@ -165,7 +165,11 @@ abstract class DatePickerComponent extends Component
                 $this->disableBefore = $dateCarbon;
                 $this->startRange = $dateCarbon;
             } elseif (!$this->endRange) {
-                $this->endRange = $dateCarbon;
+                if ($this->startRange->isSameDay($dateCarbon)) {
+                    $this->startRange = null;
+                } else {
+                    $this->endRange = $dateCarbon;
+                }
                 $this->disableBefore = $this->disableBeforeOriginal;
                 $this->disableAsOf = null;
             }
@@ -245,7 +249,6 @@ abstract class DatePickerComponent extends Component
             CarbonInterface::SUNDAY => __('Sunday'),
         ];
     }
-
 
     public function render(): View
     {
