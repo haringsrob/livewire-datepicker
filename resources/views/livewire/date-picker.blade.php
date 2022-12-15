@@ -29,7 +29,11 @@
         $dayData = $this->getAvailabilityFor($day);
       @endphp
       @if ($loop->first)
-        @for ($i = 0; $i < ($day->dayOfWeek === 0 ? 6 : ($day->dayOfWeek - ($this->startWeekOnSunday ? 0 : 1))); $i++)
+        @php
+            $skipDays = $this->startWeekOnSunday ? 7 : 6;
+        @endphp
+        @for ($i = 0; $i < ($day->dayOfWeek === 0 ? $skipDays : ($day->dayOfWeek - ($this->startWeekOnSunday ? 0 : 1))); $i++)
+
           <div></div>
         @endfor
       @endif
