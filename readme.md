@@ -60,7 +60,7 @@ And finally emit your events to other components (if needed) (example):
      */
     public function onDatesSet(): void
     {
-        $this->emit('rangeSet', ['from' => $this->startRange->format('Y-m-d'), 'till' => $this->endRange->format('Y-m-d')])
+        $this->emit('rangeSet', ['from' => $this->startRange->format('Y-m-d'), 'till' => $this->endRange->format('Y-m-d')]);
     }
 
     /**
